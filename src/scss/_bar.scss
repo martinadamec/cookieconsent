@@ -1,0 +1,163 @@
+@import "variables";
+
+.cconsent-bar {
+	&, * {
+		box-sizing: border-box
+	}
+
+	text-align: right;
+	font-family: sans-serif;
+	font-size: $cc-bar-font-size;
+	line-height: $cc-bar-line-height;
+	position: fixed;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	top: 0;
+	z-index: 9998;
+	transform: translateY(0);
+	transition: transform .6s ease-in-out;
+	transition-delay: .3s;
+	background-color: $cc-bar-overlay-bg;
+
+	.cconsent-bar-container {
+		background-color: $cc-bar-bg;
+		color: $cc-bar-color;
+		padding: $cc-bar-padding-y $cc-bar-padding-x;
+		text-align: right;
+		font-family: sans-serif;
+		font-size: $cc-bar-font-size;
+		line-height: $cc-bar-line-height;
+		position: fixed;
+		bottom: $cc-modal-container-indent;
+		left: $cc-modal-container-indent;
+		right: $cc-modal-container-indent;
+		z-index: 9998;
+		transform: translateY(0);
+		transition: transform .6s ease-in-out;
+		transition-delay: .3s;
+	}
+
+	.ccb__wrapper {
+		max-width: $cc-bar-wrapper-max-width;
+		margin: 0 auto;
+		text-align: center;
+	}
+
+	// Hidden state
+	&.ccb--hidden {
+		opacity: 0;
+		pointer-events: none;
+
+		.cconsent-bar-container {
+			transform: translateY(100%);
+			display: block;
+		}
+	}
+
+	.ccb__content {
+		text-align: left;
+		display: flex;
+		.ccb-icon {
+			flex-shrink: 0;
+			margin-right: 12px;
+			
+			svg {
+				width: 50px;
+				path {
+					fill: currentColor;
+				}
+			}
+		}
+		.ccb-text {
+			align-self: center;
+		}
+	}	
+
+	.ccb__control {
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: flex-end;
+		margin-top: 20px;
+		font-size: $cc-bar-button-font-size;
+		color: $cc-bar-color;
+		> *:not(:last-child) {
+			margin-right: 15px;
+		}
+
+		a {
+			text-decoration: underline;
+			color: $cc-bar-color;
+		}
+
+		button.consent-give, a.ccb__edit {
+			line-height: normal;
+			font-size: $cc-bar-button-font-size;
+			padding: 10px 14px;
+			border-radius: $cc-button-border-radius;
+			border: $cc-bar-button-border-width solid;
+			
+		}
+
+		button.consent-give {
+			color: $cc-bar-button-color;
+			background-color: $cc-bar-button-bg;
+			border-color: $cc-bar-button-border-color;
+		}
+
+		a.ccb__edit {
+			color: $cc-bar-button-secondary-color;
+			background-color: $cc-bar-button-secondary-bg;
+			border-color: $cc-bar-button-secondary-border-color;
+			margin-right: 15px;
+			text-decoration: none;
+			&:hover {
+				color: $cc-bar-button-secondary-color-active;
+			}
+		}
+
+		button.consent-reject {
+			background: none;
+			color: $cc-bar-color;
+			border: 0;
+			text-decoration: underline;
+			opacity: .8;
+			font-size: smaller;
+			&:hover {
+				text-decoration: none;
+				opacity: 1;
+			}
+		}
+
+		a:hover, button:hover {
+			cursor: pointer;
+		}
+	}
+
+
+	@media (max-width: $cc-bar-media-breakpoint) {
+		.cconsent-bar-container {
+			bottom: 0;
+			left: 0;
+			right: 0;
+		}
+		
+		.ccb__wrapper {
+			display: block;
+		}
+		.ccb__right {
+			margin-left: 0;
+		}
+
+		.ccb__left {
+			.ccb-icon {
+				margin-right: 10px;
+				svg {
+					width: 30px;
+				}
+			}
+		}
+	}
+}
+
+
