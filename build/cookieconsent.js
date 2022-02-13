@@ -2762,7 +2762,7 @@ function () {
       h2.style.marginBottom = '10px';
       return (0, _redom.el)('div.cconsent-modal', (0, _redom.el)('div.ccm__content', (0, _redom.el)('div.ccm__content__heading', h2, (0, _redom.el)('p', _Language.default.getTranslation(window.CookieConsent.config, window.CookieConsent.config.language.current, 'modalMainText'), window.CookieConsent.config.modalMainTextMoreLink ? (0, _redom.el)('a', {
         href: window.CookieConsent.config.modalMainTextMoreLink,
-        target: '_blank',
+        target: window.CookieConsent.config.modalMainTextMoreLinkExternal ? '_blank' : undefined,
         rel: 'noopener noreferrer'
       }, _Language.default.getTranslation(window.CookieConsent.config, window.CookieConsent.config.language.current, 'modalMainTitle')) : null), (0, _redom.el)('div.ccm__cheading__close', '×')), (0, _redom.el)('div.ccm__content__body', (0, _redom.el)('div.ccm__tabs', modalTabGroups())), (0, _redom.el)('div.ccm__footer', (0, _redom.el)('button.ccm__footer__consent-modal-submit.secondary', _Language.default.getTranslation(window.CookieConsent.config, window.CookieConsent.config.language.current, 'modalBtnSave')), (0, _redom.el)('button.consent-give', _Language.default.getTranslation(window.CookieConsent.config, window.CookieConsent.config.language.current, 'modalBtnAcceptAll')))));
     }
@@ -3199,6 +3199,7 @@ function () {
       cookieExists: false,
       cookieVersion: 1,
       modalMainTextMoreLink: null,
+      modalMainTextMoreLinkExternal: false,
       barCustomId: null,
       barTimeout: 1000,
       language: {
