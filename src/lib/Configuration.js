@@ -22,6 +22,7 @@ export default class Configuration {
             cookieExists: false,
             cookieVersion: 1,
             modalMainTextMoreLink: null,
+            modalMainTextMoreLinkExternal: false,
             barCustomId: null,
             barTimeout: 1000,
             language: {

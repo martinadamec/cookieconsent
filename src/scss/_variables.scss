@@ -1,10 +1,11 @@
 $cc-media-breakpoint: 600px !default;
 $cc-font-size: 14px !default;
 $cc-font-size-lg: 16px !default;
-$cc-line-height: 1.3 !default;
+$cc-line-height: 20px !default;
 $cc-button-border-radius: 2px !default;
 
 $cc-bar-font-size: $cc-font-size-lg !default;
+$cc-bar-font-size-responsive: $cc-font-size !default;
 $cc-bar-line-height: $cc-line-height !default;
 $cc-bar-overlay-bg: rgba(#000, .4) !default;
 $cc-bar-bg: #222 !default;

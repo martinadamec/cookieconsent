@@ -161,7 +161,7 @@ export default class Interface {
                         Language.getTranslation(window.CookieConsent.config, window.CookieConsent.config.language.current, 'modalMainText'),
                         (window.CookieConsent.config.modalMainTextMoreLink) ? el('a', {
                             href: window.CookieConsent.config.modalMainTextMoreLink,
-                            target: '_blank',
+                            target: window.CookieConsent.config.modalMainTextMoreLinkExternal ? '_blank' : undefined,
                             rel: 'noopener noreferrer'
                         }, Language.getTranslation(window.CookieConsent.config, window.CookieConsent.config.language.current, 'modalMainTitle')) : null
                     ),

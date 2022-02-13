@@ -78,11 +78,14 @@
 		display: flex;
 		flex-wrap: wrap;
 		justify-content: flex-end;
-		margin-top: 20px;
+		margin-top: 10px;
 		font-size: $cc-bar-button-font-size;
 		color: $cc-bar-color;
 		> *:not(:last-child) {
 			margin-right: 15px;
+		}
+		> * {
+			margin-top: 15px;
 		}
 
 		a {
@@ -140,16 +143,10 @@
 			bottom: 0;
 			left: 0;
 			right: 0;
+			font-size: $cc-bar-font-size-responsive;
 		}
 		
-		.ccb__wrapper {
-			display: block;
-		}
-		.ccb__right {
-			margin-left: 0;
-		}
-
-		.ccb__left {
+		.ccb__content {
 			.ccb-icon {
 				margin-right: 10px;
 				svg {
