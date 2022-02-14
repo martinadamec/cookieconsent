@@ -1,22 +1,24 @@
 {
   "name": "@martinadamec/cookieconsent",
-  "version": "1.0.0-alpha.0",
+  "version": "1.0.0",
   "description": "",
   "main": "cookieconsent.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "parcel src/index.html --no-hmr",
-    "build": "npm run build:nomin && npm run build:min && npm run build:docs && npm run build:copy",
+    "build": "npm run build:nomin && npm run build:min && npm run build:docs && npm run build:copy && npm run build:scss",
     "build:copy": "cp -R src/scss build && cp -f package.json build",
     "build:nomin": "parcel build src/index.js --out-dir build --public-url . --out-file cookieconsent.js --no-minify",
     "build:min": "parcel build src/index.js --out-dir build --public-url . --out-file cookieconsent.min.js",
     "build:docs": "parcel build src/index.js --out-dir docs_src/src/assets/js --public-url . --out-file cookieconsent.min.js",
+    "build:scss": "gulp",
     "publish:dist": "npm run build && cd build && npm publish",
     "publish:next": "npm run build && cd build && npm publish --access public --tag next",
     "publish:pack": "npm run build && cd build && npm pack"
   },
   "files": [
     "scss/**/*",
+    "css/**/*",
     "**/*.js"
   ],
   "repository": {
