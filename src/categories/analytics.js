@@ -18,6 +18,10 @@ export const analytics = {
                 name: 'Analytical cookies',
                 description: 'These cookies allow us to analyse the performance of our website and our online campaigns. We use them to see how many times you visit a site, the source of your visits and other parameters. We collect data in an aggregate form, which does not allow us to trace the data to a specific user. If you disable these cookies, we will not be able to analyse the performance of our website and optimise it for your easiest possible use.',
             },
+            sk: {
+                name: 'Analytické cookies',
+                description: 'Tieto cookies nám umožňujú merať výkonnosť našich webových stránok a našich online kampaní. S ich pomocou zisťujeme počet návštev, zdroj návštev a ďaľšie parametre. Zhromaždené údaje zisťujeme v agregovanej podobe, ktorá, nám neumožňuje údaje dohľadať ku konkrétnemu používateľovi. Ak tieto cookies deaktivujete, nebudeme môcť analyzovať výkonnosť našich webových stránok a optimalizovať ich pre čo najľahšie používanie.',
+            }
         }
     }
 };

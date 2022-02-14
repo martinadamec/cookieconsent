@@ -1,0 +1,42 @@
+{
+  "name": "@martinadamec/cookieconsent",
+  "version": "1.0.0-alpha.0",
+  "description": "",
+  "main": "cookieconsent.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "parcel src/index.html --no-hmr",
+    "build": "npm run build:nomin && npm run build:min && npm run build:docs && npm run build:copy",
+    "build:copy": "cp -R src/scss build && cp -f package.json build",
+    "build:nomin": "parcel build src/index.js --out-dir build --public-url . --out-file cookieconsent.js --no-minify",
+    "build:min": "parcel build src/index.js --out-dir build --public-url . --out-file cookieconsent.min.js",
+    "build:docs": "parcel build src/index.js --out-dir docs_src/src/assets/js --public-url . --out-file cookieconsent.min.js",
+    "publish:dist": "npm run build && cd build && npm publish",
+    "publish:next": "npm run build && cd build && npm publish --access public --tag next",
+    "publish:pack": "npm run build && cd build && npm pack"
+  },
+  "files": [
+    "scss/**/*",
+    "**/*.js"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/martinadamec/cookieconsent.git"
+  },
+  "keywords": [],
+  "author": "Brainsum",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/martinadamec/cookieconsent/issues"
+  },
+  "homepage": "https://github.com/martinadamec/cookieconsent#readme",
+  "devDependencies": {
+    "babel-core": "^6.26.3",
+    "babel-polyfill": "^6.26.0",
+    "babel-preset-env": "^1.7.0",
+    "core-js": "^2.6.5",
+    "parcel-bundler": "^1.11.0",
+    "redom": "^3.18.0"
+  },
+  "dependencies": {}
+}

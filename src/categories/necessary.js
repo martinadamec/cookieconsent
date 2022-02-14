@@ -17,6 +17,10 @@ export const necessary = {
             cs: {
                 name: 'Nezbytné cookies',
                 description: 'Jedná se o technické soubory, které jsou nezbytné ke správnému chování našich webových stránek a všech jejich funkcí. Používají se mimo jiné k ukládání produktů v nákupním košíku, zobrazování produktů na přání, ovládání filtrů, osobního nastavení a také nastavení souhlasu s uživáním cookies. Pro tyto cookies není zapotřebí Váš souhlas a není možné jej ani odebrat.',
+            },
+            sk: {
+                name: 'Nevyhnutné cookies',
+                description: 'Ide o technické súbory, ktoré sú nevyhnutné k správnemu fungovaniu našich webových stránok a všetkých ich funkcií. Okrem iného sa používajú k ukladaniu produktov v nákupnum košíku, zobrazovaniu produktov na želanie, ovládanie filtorv, osobného nastavenia a tiež nastavenia súhlasu s používaním cookies. Pre tieto cookies nie je nutné Váš súhlas a nie je možné ich ani odobrať.',
             }
         }
     }
