@@ -1,4 +1,4 @@
-import {el, mount, svg} from 'redom';
+import {el, html, mount, svg} from 'redom';
 import Language from './Language';
 import Utilities from "./Utilities";
 
@@ -60,8 +60,8 @@ export default class Interface {
                         el('div.ccb-text', barText),
                     ),
                     el('div.ccb__control',
-                        el('button.consent-reject', Language.getTranslation(window.CookieConsent.config, window.CookieConsent.config.language.current, 'barBtnReject')),
-                        el('a.ccb__edit', Language.getTranslation(window.CookieConsent.config, window.CookieConsent.config.language.current, 'barLinkSetting')),
+                        el('button.consent-reject', Language.getCurrentTranslation('barBtnReject')),
+                        el('a.ccb__edit', Language.getCurrentTranslation('barLinkSetting')),
                         el('button.consent-give', acceptText)
                     )
                 ),
@@ -97,50 +97,70 @@ export default class Interface {
 
             let i = 0;
             for (let key in window.CookieConsent.config.categories) {
-
-                contentItems.push(el('dl.ccm__tabgroup' + '.' + key + ((window.CookieConsent.config.categories[key].checked) ? '.checked-5jhk' : ''), {'data-category': key},
-                    el('dt.ccm__tab-head', Language.getTranslation(window.CookieConsent.config.categories[key], window.CookieConsent.config.language.current, 'name'),
-                        el('a.ccm__tab-head__icon-wedge',
-                            el(document.createElementNS("http://www.w3.org/2000/svg", "svg"), {
-                                    version: "1.2",
-                                    preserveAspectRatio: "none",
-                                    viewBox: "0 0 24 24",
-                                    class: "icon-wedge-svg",
-                                    "data-id": "e9b3c566e8c14cfea38af128759b91a3",
-                                    style: "opacity: 1; mix-blend-mode: normal; fill: rgb(51, 51, 51); width: 32px; height: 32px;"
-                                },
-                                el(document.createElementNS("http://www.w3.org/2000/svg", "path"), {
-                                    'xmlns:default': "http://www.w3.org/2000/svg",
-                                    id: "angle-down",
-                                    d: "M17.2,9.84c0-0.09-0.04-0.18-0.1-0.24l-0.52-0.52c-0.13-0.13-0.33-0.14-0.47-0.01c0,0-0.01,0.01-0.01,0.01  l-4.1,4.1l-4.09-4.1C7.78,8.94,7.57,8.94,7.44,9.06c0,0-0.01,0.01-0.01,0.01L6.91,9.6c-0.13,0.13-0.14,0.33-0.01,0.47  c0,0,0.01,0.01,0.01,0.01l4.85,4.85c0.13,0.13,0.33,0.14,0.47,0.01c0,0,0.01-0.01,0.01-0.01l4.85-4.85c0.06-0.06,0.1-0.15,0.1-0.24  l0,0H17.2z",
-                                    style: "fill: rgb(51, 51, 51);"
-                                })
-                            )
-                        ),
-                    ),
-                    el('dd.ccm__tab-content',
-                        el('div.ccm__tab-content__left',
-                            (!window.CookieConsent.config.categories[key].needed) && el('div.ccm__switch-component', el('div.status-off', Language.getTranslation(window.CookieConsent.config, window.CookieConsent.config.language.current, 'off')),
-                            el('div.ccm__switch-group',
-                                el('label.ccm__switch',
-                                    el('input.category-onoff', {
-                                        type: 'checkbox',
-                                        'data-category': key,
-                                        'checked': window.CookieConsent.config.categories[key].checked
-                                    }),
-                                    el('span.ccm__switch__slider')
+                if ( !window.CookieConsent.config.categories.hasOwnProperty(key) ) {
+                    return;
+                }
+                
+                const classNames = [ 'dl', 'ccm__tabgroup', key ];
+                if ( window.CookieConsent.config.categories[key].checked ) {
+                    classNames.push('checked-5jhk');
+                }
+                else {
+                    classNames.push('ccm__tabgroup--open');
+                }
+                contentItems.push(
+                    el(classNames.join('.'), {'data-category': key},
+                        el(
+                            'dt.ccm__tab-head',
+                            el('div.ccm__tab-head-name', Language.getTranslation(window.CookieConsent.config.categories[key], window.CookieConsent.config.language.current, 'name')),
+                            el('a.ccm__tab-head__icon-wedge',
+                                el(document.createElementNS("http://www.w3.org/2000/svg", "svg"), {
+                                        version: "1.2",
+                                        preserveAspectRatio: "none",
+                                        viewBox: "0 0 24 24",
+                                        class: "icon-wedge-svg",
+                                        "data-id": "e9b3c566e8c14cfea38af128759b91a3",
+                                        style: "opacity: 1; mix-blend-mode: normal; fill: rgb(51, 51, 51); width: 32px; height: 32px;"
+                                    },
+                                    el(document.createElementNS("http://www.w3.org/2000/svg", "path"), {
+                                        'xmlns:default': "http://www.w3.org/2000/svg",
+                                        id: "angle-down",
+                                        d: "M17.2,9.84c0-0.09-0.04-0.18-0.1-0.24l-0.52-0.52c-0.13-0.13-0.33-0.14-0.47-0.01c0,0-0.01,0.01-0.01,0.01  l-4.1,4.1l-4.09-4.1C7.78,8.94,7.57,8.94,7.44,9.06c0,0-0.01,0.01-0.01,0.01L6.91,9.6c-0.13,0.13-0.14,0.33-0.01,0.47  c0,0,0.01,0.01,0.01,0.01l4.85,4.85c0.13,0.13,0.33,0.14,0.47,0.01c0,0,0.01-0.01,0.01-0.01l4.85-4.85c0.06-0.06,0.1-0.15,0.1-0.24  l0,0H17.2z",
+                                        style: "fill: rgb(51, 51, 51);"
+                                    })
                                 )
                             ),
-                            el('div.status-on', Language.getTranslation(window.CookieConsent.config, window.CookieConsent.config.language.current, 'on')))
                         ),
-                        el('div.right',
-                            el('h3', Language.getTranslation(window.CookieConsent.config.categories[key], window.CookieConsent.config.language.current, 'name')),
-                            el('p', Language.getTranslation(window.CookieConsent.config.categories[key], window.CookieConsent.config.language.current, 'description')),
-                            el('div.ccm__list',
-                                listCookies(key)
+                        el('dd.ccm__tab-content',
+                            el('div.ccm__tab-content__left',
+                                (!window.CookieConsent.config.categories[key].needed) && el('div.ccm__switch-component', el('div.status-off', Language.getTranslation(window.CookieConsent.config, window.CookieConsent.config.language.current, 'off')),
+                                el('div.ccm__switch-group',
+                                    el('label.ccm__switch',
+                                        el('input.category-onoff', {
+                                            type: 'checkbox',
+                                            'data-category': key,
+                                            'checked': window.CookieConsent.config.categories[key].checked
+                                        }),
+                                        el('span.ccm__switch__slider')
+                                    )
+                                ),
+                                el('div.status-on', Language.getTranslation(window.CookieConsent.config, window.CookieConsent.config.language.current, 'on')))
+                            ),
+                            el('div.right',
+                                el('h3', Language.getTranslation(window.CookieConsent.config.categories[key], window.CookieConsent.config.language.current, 'name')),
+                                (() => {
+                                    const content = el(
+                                        'p', 
+                                        Language.getTranslation(window.CookieConsent.config.categories[key], window.CookieConsent.config.language.current, 'description')
+                                    );
+                                    content.innerHTML = Language.getTranslation(window.CookieConsent.config.categories[key], window.CookieConsent.config.language.current, 'description');
+                                    return content;
+                                })(),
+                                el('div.ccm__list',
+                                    listCookies(key)
+                                )
                             )
                         )
-                    )
                     )
                 );
 
@@ -152,19 +172,21 @@ export default class Interface {
 
         const h2 = el('h2', Language.getTranslation(window.CookieConsent.config, window.CookieConsent.config.language.current, 'modalMainTitle'));
         h2.style.marginBottom = '10px';
+        
+        const mainText = Language.getTranslation(window.CookieConsent.config, window.CookieConsent.config.language.current, 'modalMainText');
 
         return el('div.cconsent-modal',
             el('div.ccm__content',
                 el('div.ccm__content__heading',
                     h2,
-                    el('p',
-                        Language.getTranslation(window.CookieConsent.config, window.CookieConsent.config.language.current, 'modalMainText'),
+                    mainText ? el('p',
+                        mainText,
                         (window.CookieConsent.config.modalMainTextMoreLink) ? el('a', {
                             href: window.CookieConsent.config.modalMainTextMoreLink,
-                            target: window.CookieConsent.config.modalMainTextMoreLinkExternal ? '_blank' : undefined,
+                            target: window.CookieConsent.config.modalMainTextMoreLinkExternal ? '_blank' : '_self',
                             rel: 'noopener noreferrer'
                         }, Language.getTranslation(window.CookieConsent.config, window.CookieConsent.config.language.current, 'modalMainTitle')) : null
-                    ),
+                    ) : null,
                     el('div.ccm__cheading__close', '×')
                 ),
                 el('div.ccm__content__body',
@@ -173,8 +195,11 @@ export default class Interface {
                     )
                 ),
                 el('div.ccm__footer',
-                    el('button.ccm__footer__consent-modal-submit.secondary', Language.getTranslation(window.CookieConsent.config, window.CookieConsent.config.language.current, 'modalBtnSave')),
-                    el('button.consent-give', Language.getTranslation(window.CookieConsent.config, window.CookieConsent.config.language.current, 'modalBtnAcceptAll'))
+                    el('div.ccm__footer-btn-group',
+                        el('div', el('button.consent-reject', Language.getCurrentTranslation('modalBtnReject'))),
+                        el('div', el('button.ccm__footer__consent-modal-submit.secondary', Language.getCurrentTranslation('modalBtnSave'))),
+                        el('div', el('button.consent-give', Language.getCurrentTranslation('modalBtnAcceptAll')))
+                    )
                 )
             )
         );
@@ -268,6 +293,14 @@ export default class Interface {
 
         for (let button of buttonConsentReject) {
             button.addEventListener('click', () => {
+                // We set config to full consent
+                for (let key in window.CookieConsent.config.categories) {
+                    if ( !window.CookieConsent.config.categories[key].needed ) {
+                        window.CookieConsent.config.categories[key].wanted = false;
+                        window.CookieConsent.config.categories[key].checked = false;
+                    }
+                }
+                
                 this.writeBufferToDOM();
                 this.buildCookie((cookie) => {
                     this.setCookie(cookie);
@@ -295,7 +328,7 @@ export default class Interface {
         this.elements['modal'].querySelector('.ccm__tabs').addEventListener('click', (event) => {
 
             // If you click trough the tabs on Cookie settings
-            if (event.target.classList.contains('ccm__tab-head') || event.target.classList.contains('ccm__tab-head__icon-wedge')) {
+            if (event.target.classList.contains('ccm__tab-head') || event.target.classList.contains('ccm__tab-head-name') || event.target.classList.contains('ccm__tab-head__icon-wedge')) {
 
                 function getDlParent(eventTarget) {
                     var parent = eventTarget.parentNode;

@@ -181,6 +181,7 @@
   top: 14px;
 }
 .cconsent-modal .ccm__content {
+  width: 100%;
   max-width: 600px;
   min-height: 50vh;
   max-height: 90vh;
@@ -193,30 +194,34 @@
 }
 .cconsent-modal .ccm__content__body .ccm__tab-head {
   color: #333;
-  padding: 17px 35px 17px 56px;
+  padding: 10px 20px;
   margin: 0;
   transition: background-color 0.5s ease-out;
   font-weight: 600;
   cursor: pointer;
   position: relative;
+  display: flex;
+  align-items: center;
 }
 .cconsent-modal .ccm__content__body .ccm__tab-head:before {
-  position: absolute;
-  left: 35px;
   font-size: 1.4em;
+  line-height: 1;
   font-weight: 600;
   color: #E56385;
   content: "×";
-  display: inline-block;
-  margin-right: 20px;
+  margin-right: 12px;
+  flex-shrink: 0;
+}
+.cconsent-modal .ccm__content__body .ccm__tab-head .ccm__tab-head-name {
+  flex-grow: 1;
 }
 .cconsent-modal .ccm__content__body .ccm__tab-head .ccm__tab-head__icon-wedge {
   transition: transform 0.3s ease-out;
-  transform-origin: 16px 6px 0;
-  position: absolute;
-  right: 25px;
-  top: 50%;
-  transform: rotate(0deg) translateY(-50%);
+  line-height: 1;
+  transform: rotate(0deg);
+  margin-left: 12px;
+  flex-shrink: 0;
+  display: block;
 }
 .cconsent-modal .ccm__content__body .ccm__tab-head .ccm__tab-head__icon-wedge > svg {
   pointer-events: none;
@@ -327,12 +332,19 @@
   padding-left: 15px;
 }
 .cconsent-modal .ccm__footer {
-  padding: 20px;
+  padding: 10px 20px;
   background-color: #EFEFEF;
   text-align: center;
+}
+.cconsent-modal .ccm__footer .ccm__footer-btn-group {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  margin: 0 -10px;
+  position: relative;
+}
+.cconsent-modal .ccm__footer .ccm__footer-btn-group > * {
+  padding: 10px;
 }
 .cconsent-modal .ccm__footer button {
   line-height: normal;
@@ -348,9 +360,6 @@
 }
 .cconsent-modal .ccm__footer button:hover {
   background-color: #1b6cf2;
-}
-.cconsent-modal .ccm__footer button.ccm__footer__consent-modal-submit {
-  margin-right: 10px;
 }
 .cconsent-modal .ccm__footer button.secondary {
   background-color: #4285F4;

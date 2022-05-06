@@ -7,6 +7,7 @@ export const sk = {
     modalMainText: 'Cookies sú malé súbory, ktoré webové stránky (aj tie naše) ukladajú vo Vašom webovom prehliadači. Obsahy týchto súborov sa vymieňajú mezdi Vašim prehliadačom a našimi serverami, prípadne so serverami naších partnerov. Niektoré cookies potrebujeme, aby webová stránka mohla správne fungovať, niektoré potrebujeme k marketingovej a štatistickej analýze. Tu si môžete nastaviť, ktoré cookies budeme môcť používať.',
     modalBtnSave: 'Uložiť nastavenia',
     modalBtnAcceptAll: 'Súhlasím s používaním všetkých cookies',
+    modalBtnReject: 'Odmietnuť',
     modalAffectedSolutions: 'Ovplyvňuje funkcie:',
     learnMore: 'Zistiť viac',
     on: 'Zapnúť',

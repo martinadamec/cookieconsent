@@ -28,7 +28,6 @@
 	}
 
 
-
 	.ccm__content__heading {
 		border-bottom: 1px solid $cc-modal-heading-border-color;
 		padding: $cc-modal-heading-padding;
@@ -53,6 +52,7 @@
 	}
 
 	.ccm__content {
+		width: 100%;
 		max-width: $cc-modal-content-width-max;
 		min-height: $cc-modal-content-height-min;
 		max-height: $cc-modal-content-height-max;
@@ -66,31 +66,36 @@
 
 		.ccm__tab-head {
 			color: $cc-modal-title-color;
-			padding: 17px 35px 17px 56px;
+			padding: $cc-modal-tab-head-padding;
 			margin: 0;
 			transition: background-color .5s ease-out;
 			font-weight: 600;
 			cursor: pointer;
 			position: relative;
+			display: flex;
+			align-items: center;
 
 			&:before {
-				position: absolute;
-				left: 35px;
 				font-size: 1.4em;
+				line-height: 1;
 				font-weight: 600;
 				color: $cc-modal-danger;
 				content: "×";
-				display: inline-block;
-				margin-right: 20px;
+				margin-right: 12px;
+				flex-shrink: 0;
+			}
+
+			.ccm__tab-head-name {
+				flex-grow: 1;
 			}
 
 			.ccm__tab-head__icon-wedge {
 				transition: transform .3s ease-out;
-				transform-origin: 16px 6px 0;
-				position: absolute;
-				right: 25px;
-				top: 50%;
-				transform: rotate(0deg) translateY(-50%);
+				line-height: 1;
+				transform: rotate(0deg);
+				margin-left: 12px;
+				flex-shrink: 0;
+				display: block;
 
 				> svg {
 					pointer-events: none;
@@ -104,7 +109,7 @@
 
 		.ccm__tabgroup {
 			margin: 0;
-			border-bottom: 1px solid #D8D8D8;
+			border-bottom: 1px solid $cc-modal-group-border-color;
 
 			&.checked-5jhk .ccm__tab-head::before {
 				font-size: 1em;
@@ -233,22 +238,31 @@
 	}
 
 	.ccm__footer {
-		padding: 20px;
+		padding: $cc-modal-footer-padding-y $cc-modal-footer-padding-x;
 		background-color: $cc-modal-footer-bg;
 		text-align: center;
-		display: flex;
-		align-items: center;
-		justify-content: space-between;
+
+		.ccm__footer-btn-group {
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			margin: 0 (-$cc-modal-footer-button-indent);
+			position: relative;
+
+			> * {
+				padding: $cc-modal-footer-button-indent;
+			}
+		}
 
 		button {
 			line-height: normal;
-			font-size: 14px;
+			font-size: $cc-modal-button-font-size;
 			transition: background-color .5s ease-out;
 			background-color: $cc-modal-button-bg;
 			color: $cc-modal-button-color;
 			border: none;
-			padding: 12px 18px;
-			min-width: 110px;
+			padding: $cc-modal-button-padding;
+			min-width: $cc-modal-button-min-width;
 			cursor: pointer;
 			border-radius: $cc-button-border-radius;
 
@@ -256,10 +270,6 @@
 				background-color: $cc-modal-button-bg-active;
 			}
 
-			&.ccm__footer__consent-modal-submit {
-				margin-right: 10px;
-			}
-			
 			&.secondary {
 				background-color: $cc-modal-button-secondary-bg;
 				color: $cc-modal-button-secondary-color;

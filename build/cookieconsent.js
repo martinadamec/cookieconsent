@@ -2606,6 +2606,11 @@ function () {
       currentLocale = object.language.locale.hasOwnProperty(locale) ? locale : 'en';
       return object.language.locale[currentLocale].hasOwnProperty(key) ? object.language.locale[currentLocale][key] : '[Missing translation]';
     }
+  }, {
+    key: "getCurrentTranslation",
+    value: function getCurrentTranslation(key) {
+      return this.getTranslation(window.CookieConsent.config, window.CookieConsent.config.language.current, key);
+    }
   }]);
 
   return Language;
@@ -2627,6 +2632,8 @@ var _Language = _interopRequireDefault(require("./Language"));
 var _Utilities = _interopRequireDefault(require("./Utilities"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -2704,7 +2711,7 @@ function () {
 
       barText = barText.replace('%barBtnAcceptAll%', acceptText);
       var svgIcon = this.getSvgCookies();
-      return (0, _redom.el)('div.cconsent-bar.ccb--hidden', (0, _redom.el)('div.cconsent-bar-container', (0, _redom.el)("div.ccb__wrapper", (0, _redom.el)('div.ccb__content', (0, _redom.el)('div.ccb-icon', svgIcon), (0, _redom.el)('div.ccb-text', barText)), (0, _redom.el)('div.ccb__control', (0, _redom.el)('button.consent-reject', _Language.default.getTranslation(window.CookieConsent.config, window.CookieConsent.config.language.current, 'barBtnReject')), (0, _redom.el)('a.ccb__edit', _Language.default.getTranslation(window.CookieConsent.config, window.CookieConsent.config.language.current, 'barLinkSetting')), (0, _redom.el)('button.consent-give', acceptText)))));
+      return (0, _redom.el)('div.cconsent-bar.ccb--hidden', (0, _redom.el)('div.cconsent-bar-container', (0, _redom.el)("div.ccb__wrapper", (0, _redom.el)('div.ccb__content', (0, _redom.el)('div.ccb-icon', svgIcon), (0, _redom.el)('div.ccb-text', barText)), (0, _redom.el)('div.ccb__control', (0, _redom.el)('button.consent-reject', _Language.default.getCurrentTranslation('barBtnReject')), (0, _redom.el)('a.ccb__edit', _Language.default.getCurrentTranslation('barLinkSetting')), (0, _redom.el)('button.consent-give', acceptText)))));
     }
   }, {
     key: "buildModal",
@@ -2732,10 +2739,24 @@ function () {
         var contentItems = [];
         var i = 0;
 
-        for (var key in window.CookieConsent.config.categories) {
-          contentItems.push((0, _redom.el)('dl.ccm__tabgroup' + '.' + key + (window.CookieConsent.config.categories[key].checked ? '.checked-5jhk' : ''), {
+        var _loop = function _loop(key) {
+          if (!window.CookieConsent.config.categories.hasOwnProperty(key)) {
+            return {
+              v: void 0
+            };
+          }
+
+          var classNames = ['dl', 'ccm__tabgroup', key];
+
+          if (window.CookieConsent.config.categories[key].checked) {
+            classNames.push('checked-5jhk');
+          } else {
+            classNames.push('ccm__tabgroup--open');
+          }
+
+          contentItems.push((0, _redom.el)(classNames.join('.'), {
             'data-category': key
-          }, (0, _redom.el)('dt.ccm__tab-head', _Language.default.getTranslation(window.CookieConsent.config.categories[key], window.CookieConsent.config.language.current, 'name'), (0, _redom.el)('a.ccm__tab-head__icon-wedge', (0, _redom.el)(document.createElementNS("http://www.w3.org/2000/svg", "svg"), {
+          }, (0, _redom.el)('dt.ccm__tab-head', (0, _redom.el)('div.ccm__tab-head-name', _Language.default.getTranslation(window.CookieConsent.config.categories[key], window.CookieConsent.config.language.current, 'name')), (0, _redom.el)('a.ccm__tab-head__icon-wedge', (0, _redom.el)(document.createElementNS("http://www.w3.org/2000/svg", "svg"), {
             version: "1.2",
             preserveAspectRatio: "none",
             viewBox: "0 0 24 24",
@@ -2751,8 +2772,18 @@ function () {
             type: 'checkbox',
             'data-category': key,
             'checked': window.CookieConsent.config.categories[key].checked
-          }), (0, _redom.el)('span.ccm__switch__slider'))), (0, _redom.el)('div.status-on', _Language.default.getTranslation(window.CookieConsent.config, window.CookieConsent.config.language.current, 'on')))), (0, _redom.el)('div.right', (0, _redom.el)('h3', _Language.default.getTranslation(window.CookieConsent.config.categories[key], window.CookieConsent.config.language.current, 'name')), (0, _redom.el)('p', _Language.default.getTranslation(window.CookieConsent.config.categories[key], window.CookieConsent.config.language.current, 'description')), (0, _redom.el)('div.ccm__list', listCookies(key))))));
+          }), (0, _redom.el)('span.ccm__switch__slider'))), (0, _redom.el)('div.status-on', _Language.default.getTranslation(window.CookieConsent.config, window.CookieConsent.config.language.current, 'on')))), (0, _redom.el)('div.right', (0, _redom.el)('h3', _Language.default.getTranslation(window.CookieConsent.config.categories[key], window.CookieConsent.config.language.current, 'name')), function () {
+            var content = (0, _redom.el)('p', _Language.default.getTranslation(window.CookieConsent.config.categories[key], window.CookieConsent.config.language.current, 'description'));
+            content.innerHTML = _Language.default.getTranslation(window.CookieConsent.config.categories[key], window.CookieConsent.config.language.current, 'description');
+            return content;
+          }(), (0, _redom.el)('div.ccm__list', listCookies(key))))));
           i++;
+        };
+
+        for (var key in window.CookieConsent.config.categories) {
+          var _ret = _loop(key);
+
+          if (_typeof(_ret) === "object") return _ret.v;
         }
 
         return contentItems;
@@ -2760,11 +2791,14 @@ function () {
 
       var h2 = (0, _redom.el)('h2', _Language.default.getTranslation(window.CookieConsent.config, window.CookieConsent.config.language.current, 'modalMainTitle'));
       h2.style.marginBottom = '10px';
-      return (0, _redom.el)('div.cconsent-modal', (0, _redom.el)('div.ccm__content', (0, _redom.el)('div.ccm__content__heading', h2, (0, _redom.el)('p', _Language.default.getTranslation(window.CookieConsent.config, window.CookieConsent.config.language.current, 'modalMainText'), window.CookieConsent.config.modalMainTextMoreLink ? (0, _redom.el)('a', {
+
+      var mainText = _Language.default.getTranslation(window.CookieConsent.config, window.CookieConsent.config.language.current, 'modalMainText');
+
+      return (0, _redom.el)('div.cconsent-modal', (0, _redom.el)('div.ccm__content', (0, _redom.el)('div.ccm__content__heading', h2, mainText ? (0, _redom.el)('p', mainText, window.CookieConsent.config.modalMainTextMoreLink ? (0, _redom.el)('a', {
         href: window.CookieConsent.config.modalMainTextMoreLink,
-        target: window.CookieConsent.config.modalMainTextMoreLinkExternal ? '_blank' : undefined,
+        target: window.CookieConsent.config.modalMainTextMoreLinkExternal ? '_blank' : '_self',
         rel: 'noopener noreferrer'
-      }, _Language.default.getTranslation(window.CookieConsent.config, window.CookieConsent.config.language.current, 'modalMainTitle')) : null), (0, _redom.el)('div.ccm__cheading__close', '×')), (0, _redom.el)('div.ccm__content__body', (0, _redom.el)('div.ccm__tabs', modalTabGroups())), (0, _redom.el)('div.ccm__footer', (0, _redom.el)('button.ccm__footer__consent-modal-submit.secondary', _Language.default.getTranslation(window.CookieConsent.config, window.CookieConsent.config.language.current, 'modalBtnSave')), (0, _redom.el)('button.consent-give', _Language.default.getTranslation(window.CookieConsent.config, window.CookieConsent.config.language.current, 'modalBtnAcceptAll')))));
+      }, _Language.default.getTranslation(window.CookieConsent.config, window.CookieConsent.config.language.current, 'modalMainTitle')) : null) : null, (0, _redom.el)('div.ccm__cheading__close', '×')), (0, _redom.el)('div.ccm__content__body', (0, _redom.el)('div.ccm__tabs', modalTabGroups())), (0, _redom.el)('div.ccm__footer', (0, _redom.el)('div.ccm__footer-btn-group', (0, _redom.el)('div', (0, _redom.el)('button.consent-reject', _Language.default.getCurrentTranslation('modalBtnReject'))), (0, _redom.el)('div', (0, _redom.el)('button.ccm__footer__consent-modal-submit.secondary', _Language.default.getCurrentTranslation('modalBtnSave'))), (0, _redom.el)('div', (0, _redom.el)('button.consent-give', _Language.default.getCurrentTranslation('modalBtnAcceptAll')))))));
     }
   }, {
     key: "modalRedrawIcons",
@@ -2901,6 +2935,14 @@ function () {
           var _button = _step3.value;
 
           _button.addEventListener('click', function () {
+            // We set config to full consent
+            for (var key in window.CookieConsent.config.categories) {
+              if (!window.CookieConsent.config.categories[key].needed) {
+                window.CookieConsent.config.categories[key].wanted = false;
+                window.CookieConsent.config.categories[key].checked = false;
+              }
+            }
+
             _this.writeBufferToDOM();
 
             _this.buildCookie(function (cookie) {
@@ -2942,7 +2984,7 @@ function () {
 
       this.elements['modal'].querySelector('.ccm__tabs').addEventListener('click', function (event) {
         // If you click trough the tabs on Cookie settings
-        if (event.target.classList.contains('ccm__tab-head') || event.target.classList.contains('ccm__tab-head__icon-wedge')) {
+        if (event.target.classList.contains('ccm__tab-head') || event.target.classList.contains('ccm__tab-head-name') || event.target.classList.contains('ccm__tab-head__icon-wedge')) {
           var getDlParent = function getDlParent(eventTarget) {
             var parent = eventTarget.parentNode;
 
@@ -3102,6 +3144,7 @@ var en = {
   modalMainText: 'Cookies are small piece of data sent from a website and stored on the user\'s computer by the user\'s web browser while the user is browsing. Your browser stores each message in a small file, called cookie. When you request another page from the server, your browser sends the cookie back to the server. Cookies were designed to be a reliable mechanism for websites to remember information or to record the user\'s browsing activity.',
   modalBtnSave: 'Save current settings',
   modalBtnAcceptAll: 'Accept all cookies and close',
+  modalBtnReject: 'Reject',
   modalAffectedSolutions: 'Affected solutions:',
   learnMore: 'Learn More',
   on: 'On',
@@ -3124,12 +3167,36 @@ var cs = {
   modalMainText: 'Cookies jsou malé soubory, které webové stránky (i ty naše) ukládají ve Vašem webovém prohlížeči. Obsahy těchto souborů jsou vyměňovány mezi Vaším prohlížečem a našimi servery, případně se servery našich partnerů. Některé cookies potřebujeme, aby webová stránka mohla správně fungovat, některé potřebujeme k marketingové a statistické analytice. Zde si můžete nastavit, které cookies budeme moci používat. ',
   modalBtnSave: 'Uložit nastavení',
   modalBtnAcceptAll: 'Souhlasím s použitím všech cookies',
+  modalBtnReject: 'Odmítnout',
   modalAffectedSolutions: 'Ovlivňuje funkce:',
   learnMore: 'Zjistit více',
   on: 'Zapnout',
   off: 'Vypnout'
 };
 exports.cs = cs;
+},{}],"vfJZ":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.sk = void 0;
+var sk = {
+  barMainText: 'Naše webové stránky používajú cookies, ktoré nám pomáhajú zistiť, ako sú naše stránky používané. Aby sme cookies mohli používať, musíte nám to povoliť. Kliknutím na tlačítko, „%barBtnAcceptAll%“ tento súhlas udeľujete.',
+  barLinkSetting: 'Nastavenia',
+  barBtnReject: 'Odmietnuť',
+  barBtnAcceptAll: 'Súhlasím',
+  modalMainTitle: 'Nastavenia súboru cookies',
+  modalMainText: 'Cookies sú malé súbory, ktoré webové stránky (aj tie naše) ukladajú vo Vašom webovom prehliadači. Obsahy týchto súborov sa vymieňajú mezdi Vašim prehliadačom a našimi serverami, prípadne so serverami naších partnerov. Niektoré cookies potrebujeme, aby webová stránka mohla správne fungovať, niektoré potrebujeme k marketingovej a štatistickej analýze. Tu si môžete nastaviť, ktoré cookies budeme môcť používať.',
+  modalBtnSave: 'Uložiť nastavenia',
+  modalBtnAcceptAll: 'Súhlasím s používaním všetkých cookies',
+  modalBtnReject: 'Odmietnuť',
+  modalAffectedSolutions: 'Ovplyvňuje funkcie:',
+  learnMore: 'Zistiť viac',
+  on: 'Zapnúť',
+  off: 'Vypnúť'
+};
+exports.sk = sk;
 },{}],"mGQU":[function(require,module,exports) {
 "use strict";
 
@@ -3148,11 +3215,19 @@ Object.defineProperty(exports, "cs", {
     return _cs.cs;
   }
 });
+Object.defineProperty(exports, "sk", {
+  enumerable: true,
+  get: function () {
+    return _sk.sk;
+  }
+});
 
 var _en = require("./en");
 
 var _cs = require("./cs");
-},{"./en":"n2FS","./cs":"WETQ"}],"duLQ":[function(require,module,exports) {
+
+var _sk = require("./sk");
+},{"./en":"n2FS","./cs":"WETQ","./sk":"vfJZ"}],"duLQ":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
