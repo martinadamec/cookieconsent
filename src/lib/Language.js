@@ -14,5 +14,9 @@ export default class Language {
 
     return (object.language.locale[currentLocale].hasOwnProperty(key)) ? object.language.locale[currentLocale][key] : '[Missing translation]';
   }
+  
+  static getCurrentTranslation(key) {
+    return this.getTranslation(window.CookieConsent.config, window.CookieConsent.config.language.current, key);
+  }
 
 }
